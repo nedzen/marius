@@ -4,7 +4,9 @@
   line-height: normal !important;
   letter-spacing: normal !important;
 }
-
+body * {
+    outline: 1px solid pink !important;
+}
 .internal-link-container > .internal-link:hover + .note-preview {
   @apply block;
 }
