@@ -2,4 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@import 'additional-styles/utils.css'
+@import 'additional-styles/utils.css';
+
+body * {
+  outline: 1px solid red;
+}
