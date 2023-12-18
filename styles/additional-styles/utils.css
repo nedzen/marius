@@ -5,7 +5,8 @@
   letter-spacing: normal !important;
 }
 body * {
-    outline: 1px solid pink !important;
+    outline: 1px solid greenyellow;
+    background: gray;
 }
 .internal-link-container > .internal-link:hover + .note-preview {
   @apply block;

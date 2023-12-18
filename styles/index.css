@@ -3,7 +3,3 @@
 @tailwind utilities;
 
 @import 'additional-styles/utils.css';
-
-body * {
-  outline: 1px solid greenyellow;
-}
