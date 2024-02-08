@@ -1,0 +1,341 @@
+// Quickly create button styles
+@mixin button-style(
+  $border-color: null,
+  $bg-color: null,
+  $color: null,
+  $hover-border-color: null,
+  $hover-bg-color: null,
+  $hover-color: null,
+  $active-border-color: null,
+  $active-bg-color: null,
+  $active-color: null
+) {
+  @if $border-color {
+    border-color: $border-color;
+  }
+  @if $bg-color {
+    background-color: $bg-color;
+  }
+  @if $color {
+    color: $color;
+  }
+
+  &:hover {
+    @if $hover-border-color {
+      border-color: $hover-border-color;
+    }
+    @if $hover-bg-color {
+      background-color: $hover-bg-color;
+    }
+    @if $hover-color {
+      color: $hover-color;
+    }
+    // text-decoration: none
+  }
+
+  // removed focus state because it causes the button to stay selected
+  &:active,
+  &:focus {
+    @if $active-border-color {
+      border-color: $active-border-color;
+    }
+    @if $active-bg-color {
+      background-color: $active-bg-color;
+    }
+    @if $active-color {
+      color: $active-color;
+    }
+    //box-shadow: inset 0 1px 4px rgba(0,0,0,0.1)
+  }
+}
+
+// requires buttons mixin
+// .truncate {
+//  width: 250px;
+//  white-space: nowrap;
+//  overflow: hidden;
+//  text-overflow: ellipsis;
+// }
+
+// ---------------------------------------
+/*zex */
+// button[class^='btn'],
+// input[class^='btn'] {
+//  border: 0;
+// }
+
+// This is a V1 of my experimental button mixin.
+*[class^='btn'] {
+  // general
+  @include transition(400ms);
+  @include user-select(none);
+
+  margin: 0;
+  position: relative;
+
+  // bottom: 0;
+  display: inline-block;
+  vertical-align: bottom;
+  white-space: nowrap;
+
+  // make in a mixin maybe
+  text-overflow: ellipsis;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+
+  // structure
+  padding-top: map-get($btn_pad, top);
+  padding-right: map-get($btn_pad, right);
+  padding-bottom: map-get($btn_pad, bottom);
+  padding-left: map-get($btn_pad, left);
+
+  // min-width: disabled till later consideration;
+  min-height: $btn_height;
+  border-radius: $btn_radius;
+  line-height: $btn_height;
+  // font-family: $bold-ff;
+
+  // font-weight: 900;
+  @if $btn_border != 0 {
+    border-width: $btn_border;
+    border-style: solid;
+    border-color: $btn_border_color;
+  }
+
+  // type
+  @if $btn_ff != $base-ff {
+    font-family: $btn_ff;
+  }
+
+  @if $btn_fs != $base-fs {
+    font-size: $btn_fs;
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+
+  &:focus {
+    color: white;
+  }
+
+  @if $need-icon-right-buttons != false {
+    // this padding here is very dirty, Ideally I should use a map
+    // and take the second value - namely the side padding.
+    // the 3 in this case shoulnt b there
+    $compute-icon-spacing: map-get($btn_pad, right) / 2;
+    $compute-icopad: $btn_height + $compute-icon-spacing;
+
+    &[class*='-i_r'] {
+      padding-right: $compute-icopad;
+      // padding-right: 100px!important;
+      // border: 1px solid red;
+    }
+
+    &::before {
+      right: $compute-icon-spacing / 2;
+      width: $btn_height;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    // makes the button easier to hit on mobile
+    &:after {
+      content: '';
+      @include position(absolute, -4px, -4px, -4px, -4px);
+      cursor: pointer;
+    }
+  }
+
+  // Default style is required.
+  // disable properties that you don't need
+  // -----------------------------
+
+  @include button-style(
+    $border-color: map-get($outline-dark, border-color),
+    $bg-color: map-get($outline-dark, background-color),
+    $color: map-get($outline-dark, color),
+    $hover-border-color: map-get($outline-dark, hover-border-color),
+    $hover-bg-color: map-get($outline-dark, hover-bg-color),
+    $hover-color: map-get($outline-dark, hover-color),
+    $active-border-color: map-get($outline-dark, active-border-color),
+    $active-bg-color: map-get($outline-dark, active-bg-color),
+    $active-color: map-get($outline-dark, active-color)
+  );
+
+  // ------
+  // custom
+  box-shadow: 0px 3px 6px 0px rgba($n-8, 0.1);
+
+  &:hover {
+    box-shadow: 0px 4px 9px 0px rgba($n-8, 0.15);
+    // bottom: 1px;
+  }
+
+  &:active,
+  &:focus {
+    box-shadow: 0px 1px 2px 0px rgba($n-8, 0.15);
+  }
+
+  // for the sake of accesibility
+  // &:active, &:focus {
+  //  box-shadow: 0px 0px 0px 2px rgba($n-7, .20)
+  // }
+
+  // more styles
+  // ------------------------------------
+  @each $style, $icon in $btn-styles {
+    &.#{'' + $style} {
+      @include button-style(
+        $border-color: map-get($icon, border-color),
+        $bg-color: map-get($icon, background-color),
+        $color: map-get($icon, color),
+        $hover-border-color: map-get($icon, hover-border-color),
+        $hover-bg-color: map-get($icon, hover-bg-color),
+        $hover-color: map-get($icon, hover-color),
+        $active-border-color: map-get($icon, active-border-color),
+        $active-bg-color: map-get($icon, active-bg-color),
+        $active-color: map-get($icon, active-color)
+      );
+    }
+  }
+
+  // [class*="ico"] {
+  // 	&:before
+  // }
+}
+
+/*zex */
+.test-shadow {
+  @include size(200px);
+
+  border: 1px solid rgba($n-8, 0.05);
+
+  // box-shadow: 0px 0px 0px 1px rgba($n-8, .05);
+}
+
+@if $need-small-buttons != false {
+  [class*='-sm'] {
+    // structure
+    padding-top: map-get($btn-sm_pad, top);
+    padding-right: map-get($btn-sm_pad, right);
+    padding-bottom: map-get($btn-sm_pad, bottom);
+    padding-left: map-get($btn-sm_pad, left);
+
+    // min-width: disabled till later consideration;
+    min-height: $btn-sm_height;
+
+    // border-radius: inherit'ed // make custom if you really need it
+    line-height: $btn-sm_height;
+
+    // type
+    font-size: $btn-sm_fs;
+    line-height: $btn-sm_height;
+  }
+}
+
+@if $need-big-buttons != false {
+  [class*='-big'] {
+    // structure
+    padding-top: map-get($btn-big_pad, top);
+    padding-right: map-get($btn-big_pad, right);
+    padding-bottom: map-get($btn-big_pad, bottom);
+    padding-left: map-get($btn-big_pad, left);
+
+    // min-width: disabled till later consideration;
+    min-height: $btn-big_height;
+
+    // border-radius: inherit'ed // make custom if you really need it
+    line-height: $btn-big_height;
+
+    // type
+    font-size: $btn-big_fs;
+    line-height: $btn-big_height;
+  }
+}
+
+// computing icon paddings
+$compute-big-icopad: map-get($btn-big_pad, right) / 2 + $btn-big_height;
+
+@if ($need-big-buttons != false) & & ($need-icon-right-buttons != false) {
+  [class*='-big'][class*='-i_r'] {
+    // outline: 2px solid green;
+    padding-right: $compute-big-icopad;
+
+    // padding-right: 100px!important;
+    // border: 1px solid red;
+    $compute-big-icon-spacing: map-get($btn-big_pad, right) / 2;
+    $totalbuttonheight: $btn-big_height +
+      map-get($btn-big_pad, top) +
+      map-get($btn-big_pad, bottom);
+
+    &:before {
+      width: $totalbuttonheight;
+      right: $compute-big-icon-spacing / 2;
+    }
+  }
+}
+
+@if $need-block-buttons != false {
+  [class*='-block'] {
+    display: block;
+    width: 100%;
+  }
+}
+
+@if $need-block-buttons != false {
+  [class*='-transparent'] {
+    &,
+    &:hover,
+    &:focus,
+    &:active {
+      border-color: transparent !important;
+      background-color: transparent !important;
+      box-shadow: none !important;
+    }
+  }
+}
+
+%btn-icon-defaults {
+  &::before {
+    content: '';
+    margin: 0 !important;
+    display: block;
+
+    // background-color: $pink;
+    position: absolute;
+
+    // width: $btn-icon-
+    top: 0;
+    bottom: 0;
+  }
+}
+
+@if $need-icon-left-buttons != false {
+  [class*='-i_l'] {
+    @extend %btn-icon-defaults;
+  }
+}
+
+@if $need-icon-right-buttons != false {
+  [class*='-i_r'] {
+    @extend %btn-icon-defaults;
+  }
+}
+
+// @if $need-square-buttons != false {
+//  [class*='-sq'] {
+//    padding-left: 0!important;
+//    padding-right: 0!important;
+//    width: $btn_height + 4;
+//    height: $btn_height + 4;
+//    .svg {
+//      position: absolute;
+//      top:0;
+//      left:0;
+//    }
+//  }
+// }

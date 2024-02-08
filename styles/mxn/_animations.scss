@@ -1,0 +1,92 @@
+//animation mixin experiment
+// http://joshbroton.com/quick-fix-sass-mixins-for-css-keyframe-animations/
+// ------------------------
+// .element {
+//   animation-name: stretch;
+//   animation-duration: 1.5s;
+//   animation-timing-function: ease-out;
+//   animation-delay: 0;
+//   animation-direction: alternate;
+//   animation-iteration-count: infinite;
+//   animation-fill-mode: none;
+//   animation-play-state: running;
+// }
+
+// Using the mixins looks like this:
+// =====================================
+// @include keyframes(move-the-object) {
+//   0%   { left: 100px; }
+//   100% { left: 200px; }
+// }
+// .object-to-animate {
+//   @include animation('move-the-object .5s 1', 'move-the-object-again .5s 1 .5s');
+// }
+
+// ------------------------
+
+@mixin animation($animate...) {
+  $max: length($animate);
+  $animations: '';
+
+  @for $i from 1 through $max {
+    $animations: #{$animations + nth($animate, $i)};
+
+    @if $i < $max {
+      $animations: #{$animations + ', '};
+    }
+  }
+
+  -webkit-animation: $animations;
+  -moz-animation: $animations;
+  -o-animation: $animations;
+  animation: $animations;
+}
+
+@mixin keyframes($animationName) {
+  @-webkit-keyframes #{$animationName} {
+    @content;
+  }
+  @-moz-keyframes #{$animationName} {
+    @content;
+  }
+  @-o-keyframes #{$animationName} {
+    @content;
+  }
+  @keyframes #{$animationName} {
+    @content;
+  }
+}
+
+@mixin animation-delay($t) {
+  -webkit-animation-delay: $t;
+  -moz-animation-delay: $t;
+  -o-animation-delay: $t;
+  -ms-animation-delay: $t;
+  animation-delay: $t;
+}
+
+@mixin rotate($val: -2deg) {
+  -webkit-transform: rotate($val);
+  -moz-transform: rotate($val);
+  -ms-transform: rotate($val);
+  -o-transform: rotate($val);
+  transform: rotate($val);
+}
+
+// @mixin animation($name, $time, $type) {
+// 	-webkit-animation: $name $time $type; //ease-out
+// 	-moz-animation: $name $time $type; //ease-out
+// 	animation: $name $time $type; //ease-out
+// }
+
+@mixin animation-iteration-count($times: infinite) {
+  -webkit-animation-iteration-count: $times;
+  -moz-animation-iteration-count: $times;
+  animation-iteration-count: $times;
+}
+
+@mixin animation-iteration-count($times: infinite) {
+  -webkit-animation-iteration-count: $times;
+  -moz-animation-iteration-count: $times;
+  animation-iteration-count: $times;
+}

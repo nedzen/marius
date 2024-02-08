@@ -1,0 +1,237 @@
+@import 'mxn/maths';
+
+// computermakewebsite.com
+// Typography ---------------------------------------
+// When I change the font root fs the sizes of rem unit change.
+
+$root-fs: 66.5%; // this unit equals to 10px making maths easy.
+// 1.6 rem = 16px
+$base-fs: 1.8rem;
+$base-lh: 1.7em;
+$base-fw: normal;
+//
+
+// $base-ff : 'Inter', sans-serif;
+
+$mono-ff: 'iA Writer Duospace', monospace;
+$hex-ff: 'hexregular', $mono-ff;
+$base-ff: $mono-ff;
+
+$h1-fs: to-rem(52px);
+$h2-fs: to-rem(40px);
+$h3-fs: to-rem(30px);
+$h4-fs: to-rem(23px);
+$h5-fs: to-rem(18px);
+$h6-fs: to-rem(16px);
+$lead-fs: $h4-fs;
+//
+$medium-fs: to-rem(16px);
+$small-fs: to-rem(14px);
+
+// Layout ---------------------------------------
+$unit: 3rem; // this won't compute if i use 'to-rem' function
+$grid: 8;
+$col: calc(100 / $grid) * 1%;
+$class-slug: 'col';
+$gutter: $unit;
+$site-margin: 4%;
+
+// STRUCTURE ------
+$site-width: 75em; // 12000px
+// $small-site-width: to-rem(560px);
+// $unit: 1.875em;
+// $unit: calculateRem(30px);
+$_unit: 16px;
+
+// increment by 0.25
+$unit_1: to-rem($_unit * 0.25); // 4
+$unit_2: to-rem($_unit * 0.5); // 8
+$unit_3: to-rem($_unit * 0.75); // 12
+$unit_4: to-rem($_unit * 1); // 16
+// increment by 0.5
+$unit_5: to-rem($_unit * 1.5); // 24
+// increment by 1
+$unit_6: to-rem($_unit * 2); // 32
+$unit_7: to-rem($_unit * 3); // 48
+$unit_8: to-rem($_unit * 4); // 62
+// increment by 2
+$unit_9: to-rem($_unit * 6); // 96
+$unit_10: to-rem($_unit * 8); // 128
+// increment by 4
+$unit_11: to-rem($_unit * 12); // 192
+$unit_12: to-rem($_unit * 16); // 256
+// increment by 8
+$unit_13: to-rem($_unit * 24); // 384
+$unit_14: to-rem($_unit * 32); // 512
+$unit_15: to-rem($_unit * 40); // 640
+$unit_16: to-rem($_unit * 48); // 768
+
+/* COLORS --------------------------------------- */
+// Signaling
+$pink: transparentize(fuchsia, 0.6);
+$pink-2: transparentize(blue, 0.8);
+
+$purple: #6100ff;
+$base-color: #1d1d1d;
+$base-link-color: black;
+$base-link-hover: $pink;
+$base-bg: #f2f2f2;
+
+/* Neutrals palette */
+$n-9: #3f3f3f;
+$n-8: #6c6c6c;
+$n-7: #898989;
+$n-6: #a0a0a0;
+$n-5: #b3b3b3;
+$n-4: #c4c4c4;
+$n-3: #d3d3d3;
+$n-2: #e1e1e1;
+$n-1: #ededed;
+$n-0: #f9f9f9; // gray light
+
+// // Social media
+// $tw_color: #00aced;
+// $fb_color: #3b5998;
+// $in_color: #007AB5;
+
+// // Generic styles n stuff
+// $brd_radius_one: 3px;
+
+// // --------------------
+$sassy-base-color: $n-7 !default;
+$sassy-accent-color: $n-9 !default;
+$sassy-disabled-color: $n-4 !default;
+$sassy-base-text-color: $n-8;
+
+// // ---------------------------------------------
+// // ---------------------------------------------
+// // configure Buttons.
+// // ---------------------------------------------
+// // style and shadows.
+//
+$btn_active_shadow: 0px 0px 1px 0px rgba($n-8, 0.05),
+  0px 3px 6px 0px rgba($n-8, 0.05);
+$btn_hover_shadow: 0px 0px 1px 0px rgba($n-8, 0.05),
+  0px 3px 6px 0px rgba($n-8, 0.05);
+$btn_pressed_shadow: 0px 0px 1px 0px rgba($n-8, 0.05),
+  0px 3px 6px 0px rgba($n-8, 0.05);
+
+// Effect: Drop Shadow
+// Radius: 13px
+// Offset: 0px, 1px
+// rgba(39, 56, 93, 0.1)
+
+$prod-img-shadow: 0px 1px 13px 0px rgba($n-8, 0.15);
+// Stroke: Solid
+// Align: Inside
+// Width: 1px
+// rgba(2, 24, 102, 0.1)
+// Effect Style: sh_2
+// Effect: Drop Shadow
+// Radius: 14px
+// Offset: 0px, 4px
+// rgba(2, 24, 102, 0.17)
+
+$prod-feature-shadow: 0px 4px 14px 0px rgba($n-8, 0.05);
+// Stroke Color Style: btn_brd
+// Solid
+// rgba(2, 24, 102, 0.1)
+// Align: Inside
+// Width: 1px
+//
+// Effect Style: btn_normal
+// Effect: Drop Shadow
+// Radius: 6px
+// Offset: 0px, 3px
+// rgba(2, 24, 102, 0.1)
+// paddings in a map
+// default buttons config.
+
+$btn_pad: (
+  top: 0,
+  right: 15px,
+  bottom: 1px,
+  left: 15px,
+);
+$btn_height: 32px;
+$btn_border: 1px; // if zero no need to configure further border properties
+$btn_border_color: rgba($n-8, 0.13);
+$btn_fs: $base-fs;
+$btn_radius: 3px;
+$btn_bg: white;
+// small buttons
+$need-small-buttons: true;
+
+// ------------------------
+$btn-sm_pad: (
+  top: 2px,
+  right: 15px,
+  bottom: 0,
+  left: 15px,
+);
+$btn-sm_height: 30px;
+$btn-sm_fs: 14px;
+// small buttons
+$need-big-buttons: true;
+// ------------------------
+$btn-big_pad: (
+  top: 1px,
+  right: 15px,
+  bottom: 0,
+  left: 15px,
+);
+$btn-big_height: 40px;
+$btn-big_fs: 16px;
+// Block buttons
+$need-block-buttons: true;
+// ------------------------
+// Icon left buttons
+$need-icon-left-buttons: false;
+// ------------------------
+// Icon right buttons
+$need-icon-right-buttons: true;
+// ------------------------
+// Square buttons with icon inside - wip
+// $need-square-buttons:  true;
+// ------------------------
+
+// Button styles
+$btn-styles: (
+  white-outline: (
+    border-color: $n-0,
+    background-color: transparent,
+    color: $n-0,
+    hover-border-color: white,
+    hover-bg-color: $n-9,
+    hover-color: white,
+    active-border-color: white,
+    active-bg-color: $n-9,
+    active-color: white,
+  ),
+);
+//--------------------
+$enable-overlay-grid: false;
+$debug-mode: true;
+$enable-ds: true;
+// navbar --------------------
+$nav-h: to-rem(90px);
+
+// GENERAL from BOOTSTRAP ---------------------------------------
+
+$font-directory-path: '../public/fonts/';
+$image-path: '../public/images/';
+
+$container-max-widths: (
+  sm: 33.75em,
+  md: 45em,
+  lg: 60em,
+  xl: 71.25em,
+) !default;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 36em,
+  md: 48em,
+  lg: 62em,
+  xl: $site-width,
+) !default;

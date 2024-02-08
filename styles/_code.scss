@@ -1,0 +1,419 @@
+// https://spsarolkar.github.io/rouge-theme-preview/
+
+// Tokens
+@import 'tokens/code_token_colors';
+@import 'tokens/code_token_typography';
+
+// This would be awesome to make it work directly with figma design tokens
+// https://github.com/middleman/middleman-syntax
+//------------------------
+// Theme generic
+$code-bg-color: $base-bg;
+$code-base-color: $token-colors-n;
+$code-base-font: $mono-ff;
+
+//------------------------
+pre,
+code,
+kbd,
+samp {
+  font-family: $code-base-font;
+}
+
+.highlight {
+  font-size: 0.9em;
+  line-height: 1.5em;
+  color: $code-base-color;
+  background-color: $code-bg-color;
+
+  @include selection {
+    background-color: transparentize(#000, 0.7);
+    color: #777;
+  }
+
+  table {
+    td {
+      padding: 5px 10px;
+    }
+
+    pre {
+      margin: 0;
+
+      &.lineno {
+        // border-left: 2px solid lighten($code-bg-color, 3%);
+        padding: 0;
+        color: $token-colors-lineno;
+        user-select: none;
+      }
+    }
+  }
+
+  .gl {
+    color: $token-colors-gl;
+
+    // background-color: $token-colors-gl-bg
+  }
+
+  .gp {
+    color: $token-colors-gp;
+    font-weight: bold;
+  }
+
+  .c,
+  .ch,
+  .cd,
+  .cm,
+  .cpf,
+  .c1,
+  .cs {
+    color: $token-colors-c;
+    font-style: $token-fonts-c-style;
+  }
+
+  .cp {
+    color: $token-colors-cp;
+    font-weight: $token-fonts-cp-weight;
+  }
+
+  .err {
+    color: $token-colors-err;
+
+    // background-color: $token-colors-err-bg
+  }
+
+  .gr {
+    color: $token-colors-gr;
+    font-weight: $token-fonts-gr-weight;
+    font-style: $token-fonts-gr-style;
+  }
+
+  .k,
+  .kd,
+  .kv {
+    color: $token-colors-k;
+    font-weight: $token-fonts-k-weight;
+  }
+
+  .o,
+  .ow {
+    color: $token-colors-o;
+    font-weight: $token-fonts-o-weight;
+  }
+
+  .p,
+  .pi {
+    color: $token-colors-p;
+  }
+
+  .gd {
+    color: $token-colors-gd;
+  }
+
+  .gi {
+    color: $token-colors-gi;
+  }
+
+  .ge {
+    font-style: $token-fonts-ge-style;
+  }
+
+  .gs {
+    font-weight: $token-fonts-gs-weight;
+  }
+
+  .gt {
+    color: $token-colors-gt;
+
+    // background-color: $token-colors-gt-bg
+  }
+
+  .kc {
+    color: $token-colors-kc;
+    font-weight: $token-fonts-kc-weight;
+  }
+
+  .kn {
+    color: $token-colors-kn;
+    font-weight: $token-fonts-kn-weight;
+  }
+
+  .kp {
+    color: $token-colors-kp;
+    font-weight: $token-fonts-kp-weight;
+  }
+
+  .kr {
+    color: $token-colors-kr;
+    font-weight: $token-fonts-kr-weight;
+  }
+
+  .gh {
+    color: $token-colors-gh;
+    font-weight: $token-fonts-gh-weight;
+  }
+
+  .gu {
+    color: $token-colors-gu;
+    font-weight: $token-fonts-gu-weight;
+  }
+
+  .kt {
+    color: $token-colors-kt;
+    font-weight: $token-fonts-kt-weight;
+  }
+
+  .no {
+    color: $token-colors-no;
+    font-weight: $token-fonts-no-weight;
+  }
+
+  .nc {
+    color: $token-colors-nc;
+    font-weight: $token-fonts-nc-weight;
+  }
+
+  .nd {
+    color: $token-colors-nd;
+    font-weight: $token-fonts-nd-weight;
+  }
+
+  .nn {
+    color: $token-colors-nn;
+    font-weight: $token-fonts-nn-weight;
+  }
+
+  .bp {
+    color: $token-colors-bp;
+    font-weight: $token-fonts-bp-weight;
+  }
+
+  .ne {
+    color: $token-colors-ne;
+    font-weight: $token-fonts-ne-weight;
+  }
+
+  .nl {
+    color: $token-colors-nl;
+    font-weight: $token-fonts-nl-weight;
+  }
+
+  .nt {
+    color: $token-colors-nt;
+    font-weight: $token-fonts-nt-weight;
+  }
+
+  .m,
+  .mb,
+  .mf,
+  .mh,
+  .mi,
+  .il,
+  .mo,
+  .mx {
+    color: $token-colors-m;
+    font-weight: $token-fonts-m-weight;
+  }
+
+  .ld {
+    color: $token-colors-ld;
+    font-weight: $token-fonts-ld-weight;
+  }
+
+  .ss {
+    color: $token-colors-ss;
+    font-weight: $token-fonts-ss-weight;
+  }
+
+  .s,
+  .sa,
+  .sb,
+  .dl,
+  .sd,
+  .s2,
+  .sh,
+  .sx,
+  .sr,
+  .s1 {
+    color: $token-colors-s;
+    font-weight: $token-fonts-s-weight;
+  }
+
+  .se {
+    color: $token-colors-se;
+    font-weight: $token-fonts-se-weight;
+  }
+
+  .sc {
+    color: $token-colors-sc;
+    font-weight: $token-fonts-sc-weight;
+  }
+
+  .si {
+    color: $token-colors-si;
+    font-weight: $token-fonts-si-weight;
+  }
+
+  .nb {
+    font-weight: $token-fonts-nb-weight;
+  }
+
+  .ni {
+    color: $token-colors-ni;
+    font-weight: $token-fonts-ni-weight;
+  }
+
+  .w {
+    color: $token-colors-w;
+  }
+
+  .go {
+    color: $token-colors-go;
+  }
+
+  .nf,
+  .fm {
+    color: $token-colors-nf;
+  }
+
+  .py {
+    color: $token-colors-py;
+  }
+
+  .na {
+    color: $token-colors-na;
+  }
+
+  .nv,
+  .vc,
+  .vg,
+  .vi,
+  .vm {
+    color: $token-colors-nv;
+    font-weight: $token-fonts-nv-weight;
+  }
+}
+
+// //------
+// debuging class
+// .rouge-code span
+// 	outline: 1px solid transparentize(pink, .7)
+// 	position: relative
+// 	b
+// 		font-size: 10px
+// 		font-weight: bold
+// 		background-color: pink!important
+// 		color: black
+// 		line-height: 10px
+// 		padding: 1px
+// 		border-radius: 1px
+// 		height: 10px
+// 		+position(absolute, -10px, auto, auto, 0px)
+// 		// content: 'test'
+//
+// pre
+// 	overflow: visible!important
+
+/// ------------------ CHANGED CODE THEME ------------------
+/// ------------------ REMAP TO ABOVE COLORS ----------------
+.remark-code-title {
+  background-color: rgb(227, 227, 227);
+  margin-bottom: 1px;
+  font-weight: bold;
+  font-size: $small-fs;
+  padding: $_unit;
+  border-radius: 2px;
+}
+
+/* Post styles */
+.prose pre,
+pre > code {
+  font-size: $small-fs;
+  background-color: rgb(227, 227, 227);
+  line-height: 1.7em;
+  padding: $_unit;
+  display: block;
+}
+
+.prose code,
+code {
+  background-color: rgb(227, 227, 227);
+  border-radius: 2px;
+  padding: 1px 3px;
+}
+
+.prose img {
+  /* Don't apply styles to next/image */
+  margin: 0;
+}
+
+/* Prism Styles */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: rgb(114, 114, 114);
+}
+
+.token.punctuation {
+  color: rgb(255, 0, 174);
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: rgb(0, 172, 0);
+  font-weight: bold;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: purple;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: rgb(0, 183, 255);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: blue;
+}
+
+.token.function,
+.token.class-name {
+  color: black;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: yellowgreen;
+  // color: yellow;
+}
+
+code[class*='language-'],
+pre[class*='language-'] {
+  color: rgb(59, 59, 59);
+}
+
+pre::-webkit-scrollbar {
+  display: none;
+}
+
+pre {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

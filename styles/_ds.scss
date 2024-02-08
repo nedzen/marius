@@ -1,0 +1,88 @@
+@import 'mxn/maths';
+
+#design {
+  @if $enable-ds == false {
+    display: none;
+  }
+}
+
+.overlay {
+  pointer-events: none;
+  z-index: 1;
+
+  @include position(fixed, 0, 0, 0, 0);
+
+  background-color: transparentize(yellow, 0.7);
+
+  @if $enable-overlay-grid == false {
+    display: none;
+  }
+}
+
+body {
+  &.ds-grid {
+    .overlay {
+      display: block !important;
+      z-index: 99999999999999;
+    }
+  }
+}
+
+.grid {
+  // for presentational purposes
+  height: 100vh;
+
+  // background: $pink
+  pointer-events: none;
+
+  div[class^='col'] {
+    height: 100vh;
+    outline: 1px solid $pink;
+    background-color: $pink;
+
+    @for $i from 1 through $grid {
+      &:nth-child(#{$i}) {
+        &:before {
+          content: '#{$i}';
+          background-color: $pink-2;
+          display: block;
+          height: 100vh;
+        }
+      }
+    }
+  }
+}
+
+#design {
+  max-width: 900px;
+
+  @include mx-center;
+
+  heading {
+    display: block;
+    // color: $brand-green;
+    font-size: $small-fs;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: calc($unit / 2) 0;
+    margin-bottom: $unit;
+    // border-bottom: 1px solid $brand-green;
+  }
+}
+
+// .button-list
+// 	padding: $unit/2
+// 	li
+// 		margin-bottom: $unit/2
+// 		[class*='btn']
+// 			margin-right: 10px
+// 		[class*='block']
+// 			margin-bottom: 10px
+
+// Ds system
+iframe.ds-embed {
+  // display: none
+  border: 0px;
+  width: 100%;
+  height: 400px;
+}

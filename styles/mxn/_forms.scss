@@ -1,0 +1,244 @@
+@mixin appearance-none {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+@mixin sassy-text {
+  box-sizing: border-box;
+  min-height: to-rem(39);
+  width: 100%;
+  padding: to-rem(4);
+  margin-bottom: to-rem(10);
+  font-family: inherit;
+  font-size: to-rem(16);
+  vertical-align: middle;
+  border: to-rem(1) solid lighten($sassy-base-color, 10%);
+  border-radius: to-rem(2);
+  outline: none;
+  background-color: white;
+  color: $sassy-base-text-color;
+
+  &:focus {
+    border-color: $sassy-accent-color;
+  }
+
+  &:disabled {
+    background-color: $sassy-disabled-color;
+    cursor: not-allowed;
+  }
+}
+
+@mixin sassy-search {
+  @include sassy-text;
+  @include appearance-none;
+
+  padding: 0 to-rem(4);
+}
+
+@mixin sassy-textarea {
+  @include sassy-text;
+
+  display: block;
+  overflow: auto;
+}
+
+// -------------------------
+@mixin sassy-select {
+  position: relative;
+  color: inherit;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: to-rem(8);
+    right: to-rem(8);
+    color: $sassy-base-color;
+    pointer-events: none;
+
+    @include size($unit - $unit / 4);
+
+    // background-color: $pink
+    @include background-svg($ico-drop);
+  }
+
+  /* Target IE9 and IE10 */
+  select::-ms-expand {
+    display: none;
+  }
+
+  select {
+    @include appearance-none;
+
+    height: to-rem(39);
+    width: 100%;
+    padding-left: to-rem(10);
+    margin-bottom: to-rem(10);
+    font-family: inherit;
+    font-size: to-rem(14);
+    border: to-rem(2) solid lighten($sassy-base-color, 10%);
+    border-radius: to-rem(3);
+    outline: none;
+    background-color: white;
+
+    &:focus {
+      border-color: $sassy-accent-color;
+    }
+
+    &:disabled {
+      background-color: $sassy-disabled-color;
+      cursor: not-allowed;
+    }
+  }
+}
+
+@mixin sassy-select-multiple {
+  @include appearance-none;
+
+  width: 100%;
+  padding: 0 to-rem(10);
+  margin-bottom: to-rem(10);
+  font-family: inherit;
+  font-size: to-rem(14);
+  border: to-rem(1) solid lighten($sassy-base-color, 10%);
+  border-radius: to-rem(3);
+  outline: none;
+  background-color: white;
+
+  &:focus {
+    border-color: $sassy-accent-color;
+  }
+
+  &:disabled {
+    background-color: $sassy-disabled-color;
+    cursor: not-allowed;
+  }
+}
+
+// ----------------------------
+
+@mixin sassy-radio {
+  position: absolute;
+  left: -1000to-rem;
+
+  + label {
+    position: relative;
+    cursor: pointer;
+    margin-right: to-rem(15);
+    padding-left: to-rem(25);
+    font-size: to-rem(14);
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: to-rem(18);
+      width: to-rem(18);
+      border-radius: to-rem(9);
+      background-color: $sassy-base-color;
+      font-family: sans-serif;
+    }
+
+    &::after {
+      content: '';
+      transition: background-color 0.3s;
+    }
+  }
+
+  &:checked + label::after {
+    content: '';
+    position: absolute;
+    left: to-rem(5);
+    top: to-rem(3);
+    height: to-rem(8);
+    width: to-rem(8);
+    border-radius: to-rem(15);
+    background-color: $sassy-accent-color;
+    text-align: center;
+  }
+
+  &:focus + label::before {
+    box-shadow: 0 to-rem(1) 0 darken($sassy-base-color, 30%);
+  }
+
+  &:disabled {
+    + label {
+      cursor: not-allowed;
+
+      &::before {
+        background-color: $sassy-disabled-color;
+      }
+    }
+
+    &:checked + label::after {
+      background-color: darken($sassy-disabled-color, 30%);
+    }
+  }
+}
+
+// ----
+
+@mixin sassy-checkbox {
+  position: absolute;
+  left: -1000to-rem;
+
+  + label {
+    position: relative;
+    cursor: pointer;
+    margin-right: to-rem(15);
+    padding-left: to-rem(25);
+    font-size: to-rem(14);
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: to-rem(16);
+      width: to-rem(16);
+      border-radius: to-rem(3);
+      background-color: $sassy-base-color;
+      font-family: sans-serif;
+    }
+
+    &::after {
+      content: '';
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+  }
+
+  /* Not depending on the user's font here improves consistency. */
+  &:checked + label::after {
+    content: '';
+    position: absolute;
+    display: block;
+    opacity: 1;
+    left: to-rem(5);
+    top: 0;
+    width: to-rem(3);
+    height: to-rem(11);
+    border: solid $sassy-accent-color;
+    border-width: 0 to-rem(3) to-rem(3) 0;
+    transform: rotate(45deg);
+    line-height: to-rem(16);
+  }
+
+  &:focus + label::before {
+    box-shadow: 0 to-rem(1) 0 darken($sassy-base-color, 30%);
+  }
+
+  &:disabled {
+    + label {
+      cursor: not-allowed;
+
+      &::before {
+        background-color: $sassy-disabled-color;
+      }
+    }
+
+    &:checked + label::after {
+      border-color: darken($sassy-disabled-color, 30%);
+    }
+  }
+}

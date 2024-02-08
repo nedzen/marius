@@ -1,0 +1,35 @@
+// V1 icons mixin //
+// see ussage cases below --------------------
+
+// ----------------------------------------
+// slim : .ico: svg: use xlink:href="/images/icons.svg#ico_medium")
+// sass ------------------------------------
+// .ico
+// 	&.logo
+// 		+svg(100%, 230, 28)
+
+/*Handling svg icons */
+.svg {
+  position: relative;
+
+  svg {
+    // background-color: transparentize(green, .8)
+    @include position(stretch);
+    @include size(100%);
+  }
+}
+
+// sizing mixin
+@mixin svg($w, $h: null, $r: null) {
+  @include size($w, 0);
+
+  @if $r {
+    // I dont understand why the divder is not 10.
+    // work in progress (for scalebale svgs)
+    padding-top: strip-unit($h) / $r * $w / 10;
+  } @else if $h {
+    padding-top: $h;
+  } @else {
+    padding-top: $w;
+  }
+}

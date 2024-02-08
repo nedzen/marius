@@ -1,0 +1,91 @@
+@mixin add-font($font-name, $font-weight, $font-style) {
+  @font-face {
+    font-family: $font-name;
+    src: url($font-directory-path + $font-name + '.woff2') format('woff2'),
+      url($font-directory-path + $font-name + '.woff') format('woff');
+    font-weight: $font-weight;
+    font-style: $font-style;
+  }
+}
+
+// to be optimised, add a backup font face
+// check loading times and remove some formats
+// that might not be required.
+
+/*fonts */
+// +add-font('BrownStd-Regular')
+// +add-font('Brown-BoldAlt')
+// +add-font('Brown-Italic')
+
+// mixin font
+@mixin font-smoothing {
+  // auto / never / always
+  font-smooth: auto;
+
+  // none  / subpixel-antialiased / antialiased
+  -webkit-font-smoothing: antialiased;
+
+  // auto / inherit / unset / grayscale
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin small-fs {
+  font-size: $small-fs;
+  line-height: 16px;
+}
+
+@mixin big-fs {
+  font-size: $big-fs;
+  line-height: 85px;
+}
+
+// Font
+// =font-light($italic:null)
+//   font-weight: 300
+//   @if $italic
+//     font-style: italic
+
+// =font-regular($italic:null)
+//   font-weight: 400
+//   @if $italic
+//     font-style: italic
+
+// =font-medium($italic:null)
+//   font-weight: 500
+//   @if $italic
+//     font-style: italic
+
+// =font-bold($italic:null)
+//   font-weight: 700
+//   @if $italic
+//     font-style: italic
+
+// =font-black($italic:null)
+//   font-weight: 900
+//   @if $italic
+//     font-style: italic
+
+// .font-light
+//   +font-light
+
+// .font-light-italic
+//   +font-light(italic)
+
+// .font-light-italic
+//   +font-lightitalic
+// .font-regular
+//   +font-regular
+// .font-regular-italic
+//   +font-regular-italic
+// .font-medium
+//   +font-medium
+// .font-medium-italic
+//   +font-medium-italic
+// .font-bold
+//   +font-bold
+// .font-bold-italic
+//   +font-bold-italic
+// .font-black
+//   +font-black
+// .font-black-italic
+//   +font-black-italic

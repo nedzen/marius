@@ -1,0 +1,49 @@
+// Image Filters
+@mixin desaturate {
+  filter: gray;
+  filter: grayscale(1);
+  -webkit-filter: grayscale(1);
+}
+
+@mixin saturate {
+  filter: none;
+  -webkit-filter: grayscale(0);
+}
+
+// filter: none
+// blur()
+// brightness()
+// contrast()
+// drop-shadow()
+// grayscale()
+// hue-rotate()
+// invert()
+// opacity()
+// saturate()
+// sepia()
+// url();
+
+//img +filter(sepia, 100%)
+//img +filter(blur, 1px)
+//img +filter(brightness, 1.9)
+//img +filter(contrast, 12)
+//img +filter(drop-shadow, 4px 4px 4px)
+//img +filter(drop-shadow, )
+// Play with svg matrix filter
+// http://codepen.io/mullany/pen/qJCDk
+
+@mixin filter($filter-type, $filter-amount: null) {
+  @if $filter-amount {
+    -webkit-filter: $filter-type + unquote('(#{$filter-amount})');
+    -moz-filter: $filter-type + unquote('(#{$filter-amount})');
+    -ms-filter: $filter-type + unquote('(#{$filter-amount})');
+    -o-filter: $filter-type + unquote('(#{$filter-amount})');
+    filter: $filter-type + unquote('(#{$filter-amount})');
+  } @else {
+    -webkit-filter: url(image-path('#{$filter-type}'));
+    -moz-filter: url(image-path('#{$filter-type}'));
+    -ms-filter: url(image-path('#{$filter-type}'));
+    -o-filter: url(image-path('#{$filter-type}'));
+    filter: url(image-path('#{$filter-type}'));
+  }
+}

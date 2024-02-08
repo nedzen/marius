@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'hexregular';
+  src: url('#{$font-directory-path}hex/hex-regular-webfont.woff2')
+      format('woff2'),
+    url('#{$font-directory-path}hex/hex-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

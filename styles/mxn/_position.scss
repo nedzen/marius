@@ -1,0 +1,49 @@
+// V3 stretch and position mixin in one      //
+// see ussage cases below --------------------
+// .element-1
+// 	+position(static)
+// .element-2
+// 	+position(stretch)
+// .element-3
+// 	+position(absolute, 20px, 30px, 40px, 50px)
+// .element-5
+// 	+position(fixed, 20px, 30px, 40px, 50px)
+// .element-6
+// 	+position(fixed)
+// ----------------------------------------
+
+@mixin position($pos: null, $a: 0, $b: 0, $c: null, $d: null) {
+  @if $pos == absolute {
+    position: absolute;
+    top: $a;
+    right: $b;
+    bottom: $c;
+    left: $d;
+  } @else if $pos == stretch {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  } @else if $pos {
+    position: $pos;
+
+    @if $pos == fixed and $a == 0 {
+      top: $a;
+      right: $b;
+      bottom: $c;
+      left: $d;
+    }
+  } @else if $pos {
+    position: $pos;
+
+    @if $a == 0 {
+      // do nothing
+    } @else {
+      top: $a;
+      right: $b;
+      bottom: $c;
+      left: $d;
+    }
+  }
+}

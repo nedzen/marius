@@ -1,0 +1,419 @@
+// Chocolat ---------------------------------------
+/* no container mode */
+
+body {
+  &.chocolat-open {
+    & > .chocolat-overlay,
+    & > .chocolat-loader {
+      z-index: 15;
+    }
+
+    & > .chocolat-image-wrapper {
+      z-index: 17;
+    }
+  }
+}
+
+// .chocolat-open {
+//  overflow: hidden
+// }
+
+.chocolat-zoomable {
+  &.chocolat-zoomed {
+    cursor: zoom-out;
+  }
+
+  .chocolat-img {
+    cursor: zoom-in;
+  }
+
+  &.chocolat-zooming-in,
+  &.chocolat-zooming-out {
+    .chocolat-image-wrapper {
+      transition: width 0.2s ease, height 0.2s ease;
+    }
+
+    .chocolat-img {
+      transition: margin 0.2s ease;
+    }
+  }
+
+  // uncomment to hide controls when zoomed-in
+  .chocolat-top,
+  .chocolat-bottom,
+  .chocolat-right,
+  .chocolat-left {
+    transition: opacity 0.3s ease, visibility 0s 0.3s;
+    opacity: 1;
+  }
+
+  .chocolat-zoomed {
+    .chocolat-top,
+    .chocolat-bottom,
+    .chocolat-right,
+    .chocolat-left {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+}
+
+.chocolat-wrapper {
+  transition: opacity 0.4s ease, visibility 0s 0.4s ease;
+
+  @include size(100%);
+
+  position: fixed;
+  opacity: 0;
+  left: 0;
+  top: 0;
+  z-index: 16;
+  color: #fff;
+  visibility: hidden;
+
+  &.chocolat-visible {
+    transition: opacity 0.4s, visibility 0s;
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.chocolat-overlay {
+  transition: opacity 0.4s ease, visibility 0s 0.4s ease;
+  position: fixed;
+
+  @include size(100%);
+
+  left: 0;
+  top: 0;
+  z-index: 10;
+  background-color: black;
+  visibility: hidden;
+  opacity: 0;
+
+  &.chocolat-visible {
+    transition: opacity 0.4s, visibility 0s;
+    visibility: visible;
+    opacity: 0.8;
+  }
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.chocolat-loader {
+  &.chocolat-visible {
+    opacity: 1;
+  }
+
+  @include size(60);
+
+  display: inline-block;
+  transition: opacity 0.3s;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -16px;
+  margin-top: -16px;
+  z-index: 11;
+  opacity: 0;
+
+  &:after {
+    content: ' ';
+    display: block;
+
+    @include size(54px);
+
+    margin: 6px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+}
+
+.chocolat-image-wrapper {
+  position: fixed;
+
+  @include size(0);
+
+  left: 50%;
+  top: 50%;
+  z-index: 14;
+  text-align: left;
+  transform: translate(-50%, -50%);
+
+  .chocolat-img {
+    position: absolute;
+
+    @include size(100%);
+  }
+}
+
+.chocolat-layout {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.chocolat-image-canvas {
+  transition: opacity 0.2s;
+  opacity: 0;
+  flex-grow: 1;
+  align-self: stretch;
+}
+
+.chocolat-image-canvas.chocolat-visible {
+  opacity: 1;
+}
+
+.chocolat-center {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+
+%close-button {
+  @include size(50px);
+
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  top: 0;
+  right: 0;
+
+  @include transition(200ms);
+
+  &:hover {
+    background-color: white;
+
+    &::before,
+    &::after {
+      background-color: black;
+    }
+  }
+
+  &::before,
+  &::after {
+    @include transition(200ms);
+
+    content: '';
+    position: absolute;
+    background-color: #fff;
+    bottom: 48%;
+    left: 0;
+
+    @include size(100%, 2px);
+    @include rotate(45deg);
+  }
+
+  &::before {
+    @include rotate(-45deg);
+  }
+}
+
+// Left-righy buttons
+$c-arr: 40;
+
+%next-prev {
+  @include size(50px, 100px);
+
+  cursor: pointer;
+
+  // background-color: black
+  z-index: 17;
+  visibility: hidden;
+  position: relative;
+
+  &::before,
+  &::after {
+    @include transition(200ms);
+
+    content: '';
+    position: absolute;
+    background-color: #fff;
+
+    @include size(50%, 2px);
+    @include rotate(45deg);
+  }
+
+  &.active {
+    visibility: visible;
+  }
+}
+
+// Individul styles for Each button
+
+%next {
+  &:hover {
+    &::before,
+    &::after {
+      left: 26%;
+    }
+  }
+
+  &::before,
+  &::after {
+    left: 20%;
+  }
+
+  &::before {
+    @include rotate(-45deg);
+
+    bottom: 0% + $c-arr;
+  }
+
+  &::after {
+    bottom: 16.66% + $c-arr;
+  }
+}
+%prev {
+  &:hover {
+    &::before,
+    &::after {
+      right: 26%;
+    }
+  }
+
+  &::before,
+  &::after {
+    right: 20%;
+  }
+
+  &::before {
+    @include rotate(45deg);
+
+    bottom: 0% + $c-arr;
+  }
+
+  &::after {
+    @include rotate(-45deg);
+
+    bottom: 16.66% + $c-arr;
+  }
+}
+
+.chocolat-close {
+  @extend %close-button;
+}
+
+.chocolat-right,
+.chocolat-left {
+  @extend %next-prev;
+}
+
+.chocolat-right {
+  @extend %next;
+}
+
+.chocolat-left {
+  @extend %prev;
+}
+
+.chocolat-top {
+  height: 50px;
+  overflow: hidden;
+  z-index: 17;
+  flex-shrink: 0;
+}
+
+.chocolat-bottom {
+  height: 40px;
+  font-size: $medium-fs;
+  font-family: $mono-ff;
+  z-index: 17;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+
+  // background: rgba(0, 0, 0, 0.2)
+  // background-color: black
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.chocolat-set-title {
+  display: inline-block;
+  padding-right: 15px;
+  line-height: 1;
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.chocolat-pagination {
+  display: inline-block;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-right: 15px;
+}
+
+.chocolat-fullscreen {
+  @include size(40px);
+
+  display: block;
+  cursor: pointer;
+  float: right;
+  position: relative;
+
+  &:hover {
+    &::after {
+      top: 8px;
+      right: 8px;
+      bottom: 8px;
+      left: 8px;
+    }
+  }
+
+  &::before,
+  &::after {
+    @include transition(200ms);
+
+    content: '';
+    position: absolute;
+    border: 2px solid white;
+  }
+
+  &::before {
+    top: 2px;
+    right: 2px;
+    bottom: 2px;
+    left: 2px;
+  }
+
+  &::after {
+    top: 12px;
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+  }
+}
+
+.chocolat-description {
+  display: inline-block;
+  flex-grow: 1;
+  text-align: left;
+}
+
+/* container mode */
+.chocolat-in-container {
+  position: relative;
+
+  .chocolat-wrapper,
+  .chocolat-image-wrapper,
+  .chocolat-overlay {
+    position: absolute;
+  }
+}

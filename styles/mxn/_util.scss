@@ -1,0 +1,212 @@
+// utilities
+@mixin mx-center {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin user-select($select) {
+  -webkit-user-select: $select;
+  -moz-user-select: $select;
+  -ms-user-select: $select;
+  user-select: $select;
+}
+
+// truncates nasty text
+// =truncate()
+//  white-space: nowrap
+//  overflow: hidden
+//  text-overflow: ellipsis
+
+@mixin flip-x {
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: 'FlipH';
+}
+
+@mixin flip-y {
+  -moz-transform: scaleY(-1);
+  -o-transform: scaleY(-1);
+  -webkit-transform: scaleY(-1);
+  transform: scaleY(-1);
+  filter: FlipV;
+  -ms-filter: 'FlipV';
+}
+
+// selecting text
+@mixin selection {
+  ::-moz-selection {
+    @content;
+  }
+
+  ::selection {
+    @content;
+  }
+}
+
+@mixin display-flex {
+  display: -webkit-box !important;
+  display: -webkit-flex !important;
+  display: -moz-box !important;
+  display: -moz-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
+// Mixin image
+@mixin background-image($img) {
+  background-image: url(image-path($img));
+
+  // background-repeat: repeat
+}
+
+@mixin clearfix() {
+  &::after {
+    display: block;
+    clear: both;
+    content: '';
+  }
+}
+
+// usefull for quickly hiding elements
+@mixin hide($x: null) {
+  @if $x == 'hidden' {
+    visibility: hidden;
+  } @else if $x {
+    display: $x;
+  } @else {
+    display: none;
+  }
+}
+
+@mixin height-adjust($a: 100%) {
+  &:before {
+    content: '';
+    display: block;
+    padding-top: $a;
+  }
+}
+
+// Not sure exactly what .. and why.
+@mixin hover {
+  &:hover {
+    @content;
+  }
+}
+
+@mixin hover-focus {
+  @if $enable-hover-media-query {
+    &:focus {
+      @content;
+    }
+
+    @include hover {
+      @content;
+    }
+  } @else {
+    &:focus,
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin flip {
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: 'FlipH';
+}
+
+// Utilities ---------------------------------------
+// The utilities file contains all the mixins and classes
+// employed in the development phase. This code should not
+// appear on a website in production.
+
+// 1) - showunit
+// 2) - debug
+// 3) - grid-overlay
+
+@mixin showunit($a) {
+  position: relative;
+
+  * {
+    position: relative;
+  }
+
+  &:hover {
+    &:before {
+      opacity: 1;
+    }
+  }
+
+  &:before {
+    @include transition(300ms);
+
+    opacity: 0.3;
+    content: '#{$a} ';
+    color: pink;
+    background-color: black;
+
+    @include position(absolute, auto, 100%, 100%, auto);
+
+    font-size: 13px !important;
+    line-height: 15px !important;
+    height: 15px !important;
+    min-height: 15px !important;
+    font-weight: normal !important;
+    border-radius: 2px !important;
+    display: block !important;
+    padding: 0 5px !important;
+    font-family: sans-serif !important;
+  }
+}
+
+// mixin for quick debugging
+@mixin debug($i: null, $c: red, $c2: blue) {
+  @if $i {
+    #{$i} {
+      outline: 1px dotted $c;
+    }
+  } @else {
+    outline: 1px dotted $c2;
+  }
+}
+
+body.debug {
+  @include media-breakpoint-only(xs) {
+    @include debug('*', pink);
+  }
+
+  @include media-breakpoint-only(sm) {
+    @include debug('*', fuchsia);
+  }
+
+  @include media-breakpoint-only(md) {
+    @include debug('*', orange);
+  }
+
+  @include media-breakpoint-only(lg) {
+    @include debug('*', blue);
+  }
+
+  @include media-breakpoint-up(xl) {
+    @include debug('*', red);
+  }
+}
+
+.text-right {
+  text-align: right;
+}
+.text-center {
+  text-align: center;
+}

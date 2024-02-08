@@ -1,0 +1,98 @@
+/// MATHS ------------------------------------------------
+// @import '../var'
+$loops: 0;
+
+@function approximateSq($num, $approx) {
+  $root: ($num / $approx + $approx) / 2;
+
+  @return $root;
+}
+
+@function sqrt($num) {
+  $root: 0;
+  $testRoot: 0;
+  $upperBounds: round($num / 2) + 1;
+  $loops: $upperBounds;
+
+  @for $test from 2 through $upperBounds {
+    $sq: $test * $test;
+
+    @if $sq <= $num {
+      $testRoot: $test;
+    }
+  }
+
+  $root: approximateSq($num, $testRoot);
+
+  @return $root;
+}
+
+@function pow($number, $exponent) {
+  $value: 1;
+
+  @if $exponent > 0 {
+    @for $i from 1 through $exponent {
+      $value: $value * $number;
+    }
+  }
+
+  @return $value;
+}
+
+/// toFixed() function in Sass
+/// @author Hugo Giraudel
+/// @param {Number} $float - Number to format
+/// @param {Number} $digits [2] - Number of digits to leave
+/// @return {Number}
+@function to-fixed($float, $digits: 2) {
+  $sass-precision: 5;
+
+  @if $digits > $sass-precision {
+    @warn "Sass sets default precision to #{$sass-precision} digits, and there is no way to change that for now." + "The returned number will have #{$sass-precision} digits, even if you asked for `#{$digits}`." + "See https://github.com/sass/sass/issues/1122 for further informations.";
+  }
+
+  $pow: pow(10, $digits);
+
+  @return round($float * $pow) / $pow;
+}
+
+/// Remove the unit of a length
+/// @param {Number} $number - Number to remove unit from
+/// @return {Number} - Unitless number
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    $newnum: calc($number * 0) + 1;
+    @return calc($number / $newnum);
+  }
+
+  @return $number;
+}
+
+// Convert px to rem
+// this mixin is bizzare.
+// @function to-rem($a:null)
+// 	@return +to-fixed($a/(+strip-unit($root-fs)), 3) * 1rem
+
+@function to-rem($size) {
+  $remSize: calc(strip-unit($size) / 10);
+
+  @return #{$remSize}rem;
+}
+
+// Convert px to em
+@function to-em($a: null) {
+  @return +to-fixed($a / +strip-unit($root-fs)) * 1em;
+}
+
+@function pi() {
+  @return 3.1415926536;
+}
+
+// @function to-rem-beta($size) {
+//   // exact conversion basically it equals the px size in ems.
+//   $ratio1: (strip-unit($root-fs) * strip-unit($base-fs)) / 10;
+//   // currently the root ratio.
+//   $ratio2: 10;
+// 	$remSize: strip-unit($size) / $ratio2;
+// 	@return #{$remSize}rem;
+// }
