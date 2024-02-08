@@ -1,5 +1,5 @@
 import { AppProps } from 'next/app'
-import '../styles/index.css'
+import '../styles/index.scss'
 import { DefaultSeo } from 'next-seo'
 import SEO from '../next-seo.config';
 
