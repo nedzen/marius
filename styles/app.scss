@@ -585,3 +585,35 @@ article {
     color: $base-color;
   }
 }
+
+.section {
+  background-color: pink;
+  margin-bottom: $unit * 5;
+}
+
+.internal-link-container {
+  position: relative;
+  display: inline-block;
+}
+
+.note-preview {
+  position: absolute;
+  // display: none;
+  top:20px;
+  left:0;
+  width: 400px;
+  > * {
+    display: block;
+  }
+}
+
+.note-title {
+  margin-bottom: $unit/2;
+}
+.note-content {
+  background: red;
+}
+
+.sidebar {
+  background: blue;
+}

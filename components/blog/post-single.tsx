@@ -24,7 +24,7 @@ function PostSingle({
   backlinks
 }: Props) {
   return (
-    <section>
+    <section className='section'>
       <article className="post">
 
         {/* Article header */}
