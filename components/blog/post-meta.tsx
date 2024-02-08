@@ -25,12 +25,11 @@ const PostMeta = ({
         <div>
           {author && (
             <>
-              <span className="text-gray-600">By </span>
-              <a className="font-medium hover:underline" href="#0">{author.name}</a>
+              <strong>{author.name}</strong>
             </>
           )}
-          {(author && date) && <span className="text-gray-600"> · </span>}
-          {date && (<span className="text-gray-600"><DateFormatter dateString={date} /></span>)}
+          {(author && date) && <span> whatever </span>}
+          {date && (<span><DateFormatter dateString={date} /></span>)}
         </div>
       </div>
     </>

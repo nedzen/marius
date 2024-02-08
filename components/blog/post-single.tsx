@@ -25,62 +25,48 @@ function PostSingle({
 }: Props) {
   return (
     <section>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="pt-32 pb-12 md:pt-40 md:pb-20">
-          <div className="max-w-3xl mx-auto lg:max-w-none">
+      <article className="post">
 
-            <article>
+        {/* Article header */}
+        <header className="post-title">
+          {/* Title */}
+          <h1 className="h1">{title}</h1>
+        </header>
 
-              {/* Article header */}
-              <header className="max-w-3xl mx-auto mb-20">
-                {/* Title */}
-                <h1 className="h1 text-center mb-4 text-6xl">{title}</h1>
-              </header>
+        {/* Article content */}
+        <div className="content" data-sticky-container>
 
-              {/* Article content */}
-              <div className="lg:flex lg:justify-between" data-sticky-container>
+          {/* Main content */}
+          <div className='main'>
 
+            {/* Article meta */}
+            {(author || date) && (
+              <>
+                <PostMeta author={author} date={date}/>
+              </>
+            )}
 
-                {/* Main content */}
-                <div>
-
-                  {/* Article meta */}
-                  {(author || date) && (
-                    <>
-                      <PostMeta author={author} date={date}/>
-                      <hr className="w-16 h-px pt-px bg-gray-200 border-0 my-6" />
-                    </>
-                  )}
-
-                  {/* Article body */}
-                  <PostBody content={content}/>
-
-                </div>
-
-                {/* Sidebar */}
-                <hr className="my-10 border border-dashed lg:block"/>
-                <aside className="relative lg:block lg:w-72 lg:ml-20 shrink-0">
-                  <div>
-                    <h4 className="text-lg font-bold leading-snug tracking-tight mb-4">Backlinks</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4">
-                      {
-                        (Object.keys(backlinks).length > 0) && (
-                            <Backlinks backlinks={backlinks} />
-                        )
-                      }
-                    </div>
-                  </div>
-                </aside>
-
-              </div>
-
-              {/* Article footer */}
-            </article>
+            {/* Article body */}
+            <PostBody content={content}/>
 
           </div>
 
+          {/* Sidebar */}
+          <aside className="sidebar">
+            
+              <h4 className="h4">Backlinks</h4>
+              <div className="container">
+                {
+                  (Object.keys(backlinks).length > 0) && (
+                      <Backlinks backlinks={backlinks} />
+                  )
+                }
+              </div>
+          </aside>
+
         </div>
-      </div>
+        {/* Article footer */}
+      </article>
     </section>
   );
 }
